@@ -2,6 +2,7 @@ import express from "express";
 import { getUserBySessionToken } from "../models/users-models";
 import { get, merge } from "lodash";
 import { JWTverify } from "../helpers/users-helpers";
+require("dotenv").config();
 
 // User authentication by cookies
 export const isAuthenticated = async (

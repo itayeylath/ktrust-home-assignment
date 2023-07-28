@@ -11,6 +11,7 @@ export const register = async (req: express.Request, res: express.Response) => {
         }
 
         const isExistUser = await getUserByEmail(email);
+
         if (isExistUser) {
             return res.sendStatus(400);
         }
@@ -43,17 +44,15 @@ export const logIn = async (req: express.Request, res: express.Response) => {
         const user = await getUserByEmail(email).select(
             "+authentication.salt +authentication.password"
         );
-
+        
         if (!user) {
             return res.sendStatus(400);
         }
-
         const expectedHash = authentication(user.authentication.salt, password);
 
         if (user.authentication.password != expectedHash) {
             return res.sendStatus(403);
         }
-
         const salt = random();
         const token = JWTsign(user.username, salt);
 

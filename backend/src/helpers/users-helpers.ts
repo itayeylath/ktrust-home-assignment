@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken';
-
+require ("dotenv").config();
 export const random = () => {
     return crypto.randomBytes(128).toString('base64');
 }
