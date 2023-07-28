@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 // DB connect
-
 export const connectDb = (MONGO_URL: string) => {
 
     mongoose.connect(MONGO_URL);
