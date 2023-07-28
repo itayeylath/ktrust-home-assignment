@@ -1,7 +1,7 @@
 import express from "express";
 import { JWTsign, authentication, random } from "../helpers/users-helpers";
 import { createUser, getUserByEmail } from "../models/users-models";
-
+require("dotenv").config();
 // Register New user
 export const register = async (req: express.Request, res: express.Response) => {
     try {
@@ -44,7 +44,7 @@ export const logIn = async (req: express.Request, res: express.Response) => {
         const user = await getUserByEmail(email).select(
             "+authentication.salt +authentication.password"
         );
-        
+
         if (!user) {
             return res.sendStatus(400);
         }
@@ -75,6 +75,28 @@ export const logIn = async (req: express.Request, res: express.Response) => {
 export const logOut = async (_req: express.Request, res: express.Response) => {
     try {
         res.clearCookie("auth-cookie-itay");
+        return res.status(200).end();
+    } catch (err) {
+        return res.sendStatus(400).json({ massage: err.massage });
+    }
+};
+
+// Admin user authentication
+export const isAdminByMail = async (
+    req: express.Request,
+    res: express.Response,
+) => {
+    try {
+        const { email } = req.params;
+        console.log("email: ", email)
+        if (!email) {
+            return res.sendStatus(403);
+        }
+
+        if (email.toString() != process.env.ADMIN_EMAIL) {
+            return res.sendStatus(403);
+        }
+
         return res.status(200).end();
     } catch (err) {
         return res.sendStatus(400).json({ massage: err.massage });
