@@ -5,6 +5,7 @@ import AddForm from "../components/users-table/add-form";
 import ToolsBar from "../components/users-table/tools-bar";
 import { useLoginForm } from "../hooks/useLoginForm";
 import EditForm from "../components/users-table/edit-form ";
+import { useNavigate } from "react-router-dom";
 
 const HomePageAdmin = () => {
     const [data, setData] = useState<any[] | []>([]);
@@ -19,6 +20,7 @@ const HomePageAdmin = () => {
     const editformInputList: string[] = ["username"];
     const addHeadlist: string[] = ["Username", "Email", "Password"];
     const addformInputList: string[] = ["username", "email", "password"];
+    const navigate = useNavigate();
 
     // Get all data from server at thee refresh/start
     useEffect(() => {
@@ -122,6 +124,9 @@ const HomePageAdmin = () => {
                     />
                 )}
             </div>
+            <button className="" onClick={() => navigate(-1)}>
+                Logout
+            </button>
         </div>
     );
 };

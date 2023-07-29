@@ -4,6 +4,7 @@ import { Email } from '../components/inputs/email';
 import { Password } from '../components/inputs/password';
 import { Username } from '../components/inputs/username';
 import { useLoginForm } from '../hooks/useLoginForm';
+import {useNavigate } from "react-router-dom";
 
 export const Signup = () =>{
     const {
@@ -19,6 +20,7 @@ export const Signup = () =>{
 		confirmPassword,
 		setConfirmPassword,
 	} = useLoginForm({isLogin: false});
+	const navigate = useNavigate();
   return (
     <div className="login-container">
 
@@ -52,6 +54,9 @@ export const Signup = () =>{
 					Sign Up
 				</button>
 			</form>
+			<button className="" onClick={() =>  navigate(-1)}>
+						Login
+					</button>
 		</div>
   )
 }

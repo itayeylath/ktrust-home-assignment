@@ -4,6 +4,7 @@ import { Email } from '../components/inputs/email';
 import { Password } from '../components/inputs/password';
 import { Username } from '../components/inputs/username';
 import { useLoginForm } from '../hooks/useLoginForm';
+import {useNavigate } from "react-router-dom";
 
 interface LoginProps {
 	isLogin: boolean;
@@ -26,6 +27,7 @@ export const Login = () => {
 		setConfirmPassword,
 	} = useLoginForm({ isLogin: true });
 
+	const navigate = useNavigate();
 	
 	return (
 		<main className="login-main-container flex ">
@@ -69,7 +71,11 @@ export const Login = () => {
 					<button className="form-button submit-btn" type="submit">
 						Login
 					</button>
+
 				</form>
+					<button className="" onClick={() =>  navigate("/signup")}>
+						Signup
+					</button>
 			</div>
 		</main>
 	);

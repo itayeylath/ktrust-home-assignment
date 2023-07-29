@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { userService } from "../services/user.service";
 import UserTable from "../components/users-table/user-table";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
     const [data, setData] = useState<any[] | []>([]);
     const [addButton, setAddButton] = useState<boolean>(false);
     const [updatebutton, setUpdatebutton] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<any | undefined>();
+
     // Get all data from server at thee refresh/start
     useEffect(() => {
         userService.getUsers().then((result: any) => {
@@ -20,6 +22,7 @@ const HomePage = () => {
     const editformInputList: string[] = ["username"];
     const addHeadlist: string[] = ["Username", "Email", "Password"];
     const addformInputList: string[] = ["username", "email", "password"];
+    const navigate = useNavigate();
     //TODO
     // Click on add button.
     const handelButtonAdd = () => {
@@ -89,6 +92,9 @@ const HomePage = () => {
                 handelButtonDelete={handelButtonDelete}
                 handelButtonUpdate={handelButtonUpdate}
             />
+            <button className="" onClick={() => navigate(-1)}>
+                Logout
+            </button>
         </div>
     );
 };

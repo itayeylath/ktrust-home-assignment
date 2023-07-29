@@ -81,13 +81,14 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
                 } else {
                     const a = await dispatch(login({ ...userToLogin }));
                     a();
-                    console.log(a);
                     navigate("/home");
                 }
 
                 //a();
             } catch (error) {
-                console.log("parent of parent ", error);
+                throw Error(
+                     error
+                );
             }
 
             setUsername("");
