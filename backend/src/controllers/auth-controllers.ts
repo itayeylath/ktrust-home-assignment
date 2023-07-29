@@ -88,7 +88,6 @@ export const isAdminByMail = async (
 ) => {
     try {
         const { email } = req.params;
-        console.log("email: ", email)
         if (!email) {
             return res.sendStatus(403);
         }
