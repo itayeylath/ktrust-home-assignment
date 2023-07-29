@@ -4,6 +4,7 @@ export const userService = {
     login,
     signup,
     getUsers,
+    deleteUser,
 };
 
 const STORAGE_KEY_LOGGEDIN_USER: string = "loggedinUser";
@@ -41,5 +42,16 @@ async function signup(userCred: any) {
         return error.response;
     }
 }
-
+async function deleteUser(id: any) {
+    try {
+        const user = await axios.delete(
+            "http://localhost:3000/users/delete/"+
+            id
+        );
+        return user
+    } catch (error) {
+        console.log("ERROR: axios.delete");
+        return error.response;
+    }
+}
 

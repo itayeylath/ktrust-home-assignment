@@ -46,7 +46,8 @@ const AdminTable = (props: TableProps) => {
                                 <button
                                     className="table-row-delete"
                                     onClick={() => {
-                                        props.handelButtonDelete(index);
+                                        // console.log("element: ")
+                                        props.handelButtonDelete(index,element._id);
                                     }}
                                 >
                                     Delete

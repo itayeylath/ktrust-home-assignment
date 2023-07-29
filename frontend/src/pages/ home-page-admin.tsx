@@ -3,18 +3,14 @@ import { userService } from "../services/user.service";
 import AdminTable from "../components/users-table/admin-table";
 import AddForm from "../components/users-table/add-form";
 import ToolsBar from "../components/users-table/tools-bar";
+import { useLoginForm } from "../hooks/useLoginForm";
 
 const HomePageAdmin = () => {
     const [data, setData] = useState<any[] | []>([]);
     const [addButton, setAddButton] = useState<boolean>(false);
     const [updatebutton, setUpdatebutton] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<any | undefined>();
-    // Get all data from server at thee refresh/start
-    useEffect(() => {
-        userService.getUsers().then((result: any) => {
-            setData(result.data);
-        });
-    }, []);
+    //const [isConfirmAdd, setIsConfirmAdd] = useState<boolean>(false);
 
     const tableHeadlist: string[] = ["Username", "Email"];
     const formInputList: string[] = ["username", "email"];
@@ -22,6 +18,28 @@ const HomePageAdmin = () => {
     const editformInputList: string[] = ["username"];
     const addHeadlist: string[] = ["Username", "Email", "Password"];
     const addformInputList: string[] = ["username", "email", "password"];
+
+    // Get all data from server at thee refresh/start
+    useEffect(() => {
+        userService.getUsers().then((result: any) => {
+            setData(result.data);
+        });
+    }, [updatebutton, addButton, updateData]);
+
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        email,
+        setEmail,
+        errors,
+        handleSubmit,
+        validateInput,
+        confirmPassword,
+        setConfirmPassword,
+    } = useLoginForm({ isLogin: false });
+
     //TODO
     // Click on add button.
     const handelButtonAdd = () => {
@@ -30,27 +48,29 @@ const HomePageAdmin = () => {
     };
     //TODO
     // Submit form data to server for add.
-    const handelSubmitAdd = async (event: any) => {
-        event.preventDefault();
-        const data = new FormData(event.target);
+    const handelSubmitAdd = () => {
+        //event.preventDefault();
+        //const data = new FormData(event.target);
         // Server request.
-        setData((value: any) => [...value, Object.fromEntries(data)]);
+        console.log("isConfirmAdd");
+        // setIsConfirmAdd(!isConfirmAdd)
+        // setData((value: any) => [...value, Object.fromEntries(data)]);
     };
     //TODO
     // Click on delete button.
-    const handelButtonDelete = async (index: number) => {
+    const handelButtonDelete = async (index: number, id: string) => {
         // TODO: add Server request.
+        userService.deleteUser(id).then((result: any) => {
+            let newData = [];
 
-        // TODO: expport to utilis (?)
-        let newData = [];
-
-        for (let i = 0; i < data.length; i++) {
-            if (i !== index) {
-                newData.push(data[i]);
+            for (let i = 0; i < data.length; i++) {
+                if (i !== index) {
+                    newData.push(data[i]);
+                }
             }
-        }
 
-        setData(newData);
+            setData(newData);
+        });
     };
     //TODO
     // Click on update button.
@@ -94,11 +114,11 @@ const HomePageAdmin = () => {
                 handelButtonUpdate={handelButtonUpdate}
             />
             <div className="hidden-divs">
-            {addButton && (
+                {addButton && (
                     <AddForm
-                    inputsNames={addformInputList}
-                    placeholdersNames={addHeadlist}
-                    handelSubmitAdd={handelSubmitAdd}
+                        inputsNames={addformInputList}
+                        placeholdersNames={addHeadlist}
+                        handelSubmitAdd={handelSubmitAdd}
                     />
                 )}
                 {updatebutton && (

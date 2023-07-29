@@ -1,38 +1,76 @@
-
+import { useLoginForm } from "../../hooks/useLoginForm";
 import { create2DArray } from "../../utilities/add-form-func";
-
+import { Email } from "../inputs/email";
+import { Password } from "../inputs/password";
+import { Username } from "../inputs/username";
 
 interface AddFormProps {
-  inputsNames: string[];
-  placeholdersNames: string[];
-  handelSubmitAdd: any;
+    inputsNames: string[];
+    placeholdersNames: string[];
+    handelSubmitAdd: any;
 }
 
 const AddForm = (props: AddFormProps) => {
-  const svgArr: any = [
+    const svgArr: any = [];
 
-  ];
-  const arr = create2DArray(props.inputsNames, props.placeholdersNames, svgArr);
+    const {
+        username,
+        setUsername,
+        password,
+        setPassword,
+        email,
+        setEmail,
+        errors,
+        handleSubmit,
+        validateInput,
+        confirmPassword,
+        setConfirmPassword,
+    } = useLoginForm({ isLogin: false });
 
-  return (
-    <div className="add-form">
-      <form onSubmit={props.handelSubmitAdd}>
-        {arr.map((element: any, index: number) => {
-          return (
-            <div className="add-row" key={index}>
-              <div className="add-icon">{element[2]}</div>
-              <input
-                className="add-input"
-                key={index}
-                name={element[0]}
-                placeholder={element[1]}
-              />
-            </div>
-          );
-        })}
-        <input className="btn-confirm" type="submit" value="Confirm"></input>
-      </form>
-    </div>
-  );
+    const arr = create2DArray(
+        props.inputsNames,
+        props.placeholdersNames,
+        svgArr
+    );
+    
+    const test = () => {console.log("test")}
+      //
+    
+  
+    return (
+        <div className="add-form">
+            <form onSubmit={handleSubmit} >
+                
+                    <div className="add-row">
+                        <Username
+                            errors={errors}
+                            setUsername={setUsername}
+                            validateInput={validateInput}
+                            username={username}
+                        />
+                    </div>
+                    <div className="add-row">
+                        <Password
+                            errors={errors}
+                            setPassword={setPassword}
+                            validateInput={validateInput}
+                            password={password}
+                        />
+                    </div>
+                    <div className="add-row">
+                        <Email
+                            errors={errors}
+                            setEmail={setEmail}
+                            validateInput={validateInput}
+                            email={email}
+                        />
+                    </div>
+                
+                <button className="btn-confirm" type="submit">
+                    Confirm
+                </button>
+            </form>
+        </div>
+    );
 };
 export default AddForm;
