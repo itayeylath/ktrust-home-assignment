@@ -59,6 +59,7 @@ const AdminTable = (props: TableProps) => {
                                     onClick={() => {
                                         props.handelButtonUpdate(
                                             element,
+                                            element._id,
                                             index
                                         );
                                     }}

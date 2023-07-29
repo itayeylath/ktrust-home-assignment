@@ -58,7 +58,6 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log("handleSubmit: excute")
         validateInput("password", password);
         validateInput("email", email);
 
@@ -79,12 +78,11 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
                     dispatch(signup({ username, password, email }));
                 } else if (pathname == "/home/admin") {
                     dispatch(signup({ username, password, email }));
-                } 
-                else {
+                } else {
                     const a = await dispatch(login({ ...userToLogin }));
                     a();
                     console.log(a);
-					navigate("/home");
+                    navigate("/home");
                 }
 
                 //a();
@@ -94,7 +92,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
 
             setUsername("");
             setPassword("");
-			setConfirmPassword("")
+            setConfirmPassword("");
             setEmail("");
             setErrors({
                 username: "",

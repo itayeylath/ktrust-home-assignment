@@ -4,6 +4,7 @@ import AdminTable from "../components/users-table/admin-table";
 import AddForm from "../components/users-table/add-form";
 import ToolsBar from "../components/users-table/tools-bar";
 import { useLoginForm } from "../hooks/useLoginForm";
+import EditForm from "../components/users-table/edit-form ";
 
 const HomePageAdmin = () => {
     const [data, setData] = useState<any[] | []>([]);
@@ -24,7 +25,7 @@ const HomePageAdmin = () => {
         userService.getUsers().then((result: any) => {
             setData(result.data);
         });
-    }, [updatebutton, addButton, updateData]);
+    }, [updatebutton, addButton]);
 
     const {
         username,
@@ -74,32 +75,23 @@ const HomePageAdmin = () => {
     };
     //TODO
     // Click on update button.
-    const handelButtonUpdate = async (element: any, index: number) => {
-        setUpdateData({
-            element: element,
-            index: index,
-        });
-        setUpdatebutton(!updatebutton);
-        setAddButton(false);
-    };
-    //TODO
-    // Submit form data to server for update.
-    const handelSubmitUpdate = async (event: any) => {
-        event.preventDefault();
+    const handelButtonUpdate = async (element: any, id: string, index: any) => {
+        setUpdateData({name: element.username, id: id, index: index}
+            
+            );
+            setUpdatebutton(!updatebutton);
+            setAddButton(false);
+        };
+        //TODO
+        // Submit form data to server for update.
+        const handelSubmitUpdate = async (event: any,id: number) => {
+            event.preventDefault();
+            console.log("id: ", updateData.id)
         const element = Object.fromEntries(new FormData(event.target));
+        console.log("element: ", element.username)
+        userService.editUser(updateData.id,element.username).then((result: any) => {})
         // Server request.
-        // TODO: expport to utilis (?)
-        let newData = [];
-
-        for (let i = 0; i < data.length; i++) {
-            if (i !== updateData.index) {
-                newData.push(data[i]);
-            } else {
-                newData.push(element);
-            }
-        }
-        setData(newData);
-        console.log(newData);
+        
     };
 
     return (
@@ -122,11 +114,11 @@ const HomePageAdmin = () => {
                     />
                 )}
                 {updatebutton && (
-                    //TODO: handle submit edit
-                    <AddForm
+                    <EditForm
                         inputsNames={editformInputList}
                         placeholdersNames={editHeadlist}
-                        handelSubmitAdd={handelSubmitAdd}
+                        handelSubmitAdd={handelSubmitUpdate}
+                        updateData={updateData.name}
                     />
                 )}
             </div>

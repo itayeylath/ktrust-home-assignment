@@ -32,10 +32,6 @@ const AddForm = (props: AddFormProps) => {
         props.placeholdersNames,
         svgArr
     );
-    
-    const test = () => {console.log("test")}
-      //
-    
   
     return (
         <div className="add-form">

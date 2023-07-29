@@ -5,6 +5,7 @@ export const userService = {
     signup,
     getUsers,
     deleteUser,
+    editUser,
 };
 
 const STORAGE_KEY_LOGGEDIN_USER: string = "loggedinUser";
@@ -51,6 +52,22 @@ async function deleteUser(id: any) {
         return user
     } catch (error) {
         console.log("ERROR: axios.delete");
+        return error.response;
+    }
+}
+
+async function editUser(id: any, userCred: any) {
+    try {
+        console.log("http://localhost:3000/users/update/"+
+        id)
+        console.log("userCred ",userCred)
+        const user = await axios.patch(
+            "http://localhost:3000/users/update/"+
+            id,  {username: userCred}
+        );
+        return user
+    } catch (error) {
+        console.log("ERROR: axios.patch");
         return error.response;
     }
 }

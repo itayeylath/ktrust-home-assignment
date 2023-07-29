@@ -21,11 +21,6 @@ export const login = (userToLogIn: UserToLogIn) => {
 
             const { data, status } = await userService.login(userToLogIn);
             dispatch({ type: "LOGIN", loggedInUser: data });
-            //console.log("loggedInUser:", data.authentication.sessionToken);
-			//const cookies = new Cookies();
-			//cookies.set('auth-cookie-itay', data.authentication.sessionToken, { path: '/' });
-			//console.log("cookie: ",cookies.get('auth-cookie-itay')); 
-
             if (status !== 200) {
                 dispatch({ type: "LOGIN", loggedInUser: null });
                 throw Error(
@@ -72,3 +67,7 @@ export const logout = (loggedInUser: LogginInUser) => {
         }
     };
 };
+
+
+
+
