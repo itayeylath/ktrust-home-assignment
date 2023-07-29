@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { userService } from "../services/user.service";
-import UserTable from "../components/users-table/user-table";
+import AdminTable from "../components/users-table/admin-table";
+import AddForm from "../components/users-table/add-form";
+import ToolsBar from "../components/users-table/tools-bar";
 
-const HomePage = () => {
+const HomePageAdmin = () => {
     const [data, setData] = useState<any[] | []>([]);
     const [addButton, setAddButton] = useState<boolean>(false);
     const [updatebutton, setUpdatebutton] = useState<boolean>(false);
@@ -82,15 +84,34 @@ const HomePage = () => {
 
     return (
         <div>
-            <UserTable
+            <ToolsBar handelButtonAdd={handelButtonAdd} />
+
+            <AdminTable
                 head={tableHeadlist}
                 body={data}
                 elementTypes={formInputList}
                 handelButtonDelete={handelButtonDelete}
                 handelButtonUpdate={handelButtonUpdate}
             />
+            <div className="hidden-divs">
+            {addButton && (
+                    <AddForm
+                    inputsNames={addformInputList}
+                    placeholdersNames={addHeadlist}
+                    handelSubmitAdd={handelSubmitAdd}
+                    />
+                )}
+                {updatebutton && (
+                    //TODO: handle submit edit
+                    <AddForm
+                        inputsNames={editformInputList}
+                        placeholdersNames={editHeadlist}
+                        handelSubmitAdd={handelSubmitAdd}
+                    />
+                )}
+            </div>
         </div>
     );
 };
 
-export default HomePage;
+export default HomePageAdmin;
