@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { userService } from "../services/user.service";
 import AdminTable from "../components/users-table/admin-table";
+import AddForm from "../components/users-table/add-form";
+import ToolsBar from "../components/users-table/tools-bar";
 
 const HomePage = () => {
     const [data, setData] = useState<any[] | []>([]);
@@ -14,15 +16,12 @@ const HomePage = () => {
         });
     }, []);
 
-    const tableHeadlist: string[] = [
-        "Email",
-        "Username",
-
-    ];
-    const formInputList: string[] = [
-        "email",
-        "username",
-    ];
+    const tableHeadlist: string[] = ["Username", "Email"];
+    const formInputList: string[] = ["username", "email"];
+    const editHeadlist: string[] = ["Username"];
+    const editformInputList: string[] = ["username"];
+    const addHeadlist: string[] = ["Username", "Email", "Password"];
+    const addformInputList: string[] = ["username", "email", "password"];
     //TODO
     // Click on add button.
     const handelButtonAdd = () => {
@@ -85,6 +84,8 @@ const HomePage = () => {
 
     return (
         <div>
+            <ToolsBar handelButtonAdd={handelButtonAdd} />
+
             <AdminTable
                 head={tableHeadlist}
                 body={data}
@@ -92,6 +93,23 @@ const HomePage = () => {
                 handelButtonDelete={handelButtonDelete}
                 handelButtonUpdate={handelButtonUpdate}
             />
+            <div className="hidden-divs">
+            {addButton && (
+                    <AddForm
+                    inputsNames={addformInputList}
+                    placeholdersNames={addHeadlist}
+                    handelSubmitAdd={handelSubmitAdd}
+                    />
+                )}
+                {updatebutton && (
+                    //TODO: handle submit edit
+                    <AddForm
+                        inputsNames={editformInputList}
+                        placeholdersNames={editHeadlist}
+                        handelSubmitAdd={handelSubmitAdd}
+                    />
+                )}
+            </div>
         </div>
     );
 };
