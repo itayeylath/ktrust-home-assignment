@@ -81,7 +81,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
                 } else {
                     const a = await dispatch(login({ ...userToLogin }));
                     a();
-                    navigate("/home");
+                   navigate("/home");
                 }
 
                 //a();

@@ -2,7 +2,9 @@ import express from "express";
 import { getUserBySessionToken } from "../models/users-models";
 import { get, merge } from "lodash";
 import { JWTverify } from "../helpers/users-helpers";
+import cookieParser from "cookie-parser";
 require("dotenv").config();
+
 
 // User authentication by cookies
 export const isAuthenticated = async (
@@ -11,19 +13,34 @@ export const isAuthenticated = async (
     next: express.NextFunction
 ) => {
     try {
-        const sessionToken = req.cookies["auth-cookie-itay"];
 
-        if (!sessionToken) {
-            console.log(sessionToken);
+        const token = req.headers.authorization;;
+        console.log("authHeader: ", token);
+        console.log("token: ", token);
+        if (!token) {
             return res.sendStatus(403);
         }
-        const isVerifay = JWTverify(sessionToken);
+
+        const isVerifay = JWTverify(token);
 
         if (!isVerifay) {
             return res.sendStatus(403);
         }
 
-        const user = await getUserBySessionToken(sessionToken);
+        // const sessionToken = req.cookies["auth-cookie-itay"];
+        // console.log("sessionToken: ", req.headers.cookies)
+        // if (!sessionToken) {
+        //     console.log(sessionToken);
+        //     return res.sendStatus(403);
+        // }
+        // const isVerifay = JWTverify(sessionToken);
+
+        // if (!isVerifay) {
+        //     return res.sendStatus(403);
+        // }
+
+        //const user = await getUserBySessionToken(sessionToken);
+        const user = await getUserBySessionToken(token);
 
         merge(req, { identity: user });
         return next();

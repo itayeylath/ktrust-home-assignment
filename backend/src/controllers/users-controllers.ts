@@ -1,5 +1,6 @@
 import express from "express";
 import { deleteUserById, getUserById, getUsers } from "../models/users-models";
+import { JWTverify } from "../helpers/users-helpers";
 
 // Get all users exsit in DB
 export const getAllusers = async (
@@ -51,5 +52,3 @@ export const updateUser = async (
         return res.sendStatus(400).json({ massage: err.massage });
     }
 };
-
-

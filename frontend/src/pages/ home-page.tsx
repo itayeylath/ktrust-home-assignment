@@ -2,17 +2,23 @@ import { useEffect, useState } from "react";
 import { userService } from "../services/user.service";
 import UserTable from "../components/users-table/user-table";
 import { useNavigate } from "react-router-dom";
+import { store } from "../store";
 
 const HomePage = () => {
     const [data, setData] = useState<any[] | []>([]);
     const [addButton, setAddButton] = useState<boolean>(false);
     const [updatebutton, setUpdatebutton] = useState<boolean>(false);
     const [updateData, setUpdateData] = useState<any | undefined>();
-
+    const [errorData, setErrorData] = useState<any | undefined>("");
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
     // Get all data from server at thee refresh/start
     useEffect(() => {
         userService.getUsers().then((result: any) => {
-            setData(result.data);
+            try {
+                setData(result.data);
+            } catch (error) {
+                setErrorData(error);
+            }
         });
     }, []);
 
@@ -85,13 +91,15 @@ const HomePage = () => {
 
     return (
         <div>
-            <UserTable
-                head={tableHeadlist}
-                body={data}
-                elementTypes={formInputList}
-                handelButtonDelete={handelButtonDelete}
-                handelButtonUpdate={handelButtonUpdate}
-            />
+            {!errorData && (
+                ((!isAdmin && <UserTable
+                    head={tableHeadlist}
+                    body={data}
+                    elementTypes={formInputList}
+                    handelButtonDelete={handelButtonDelete}
+                    handelButtonUpdate={handelButtonUpdate}
+                />) )
+            )}
             <button className="" onClick={() => navigate(-1)}>
                 Logout
             </button>

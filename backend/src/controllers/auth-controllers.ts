@@ -64,8 +64,8 @@ export const logIn = async (req: express.Request, res: express.Response) => {
             domain: "localhost",
             path: "/",
         });
-
         return res.status(200).json(user).end();
+        //return res.status(200).json(user).end();
     } catch (err) {
         return res.sendStatus(400).json({ massage: err.massage });
     }
@@ -84,7 +84,7 @@ export const logOut = async (_req: express.Request, res: express.Response) => {
 // Admin user authentication
 export const isAdminByMail = async (
     req: express.Request,
-    res: express.Response,
+    res: express.Response
 ) => {
     try {
         const { email } = req.params;
