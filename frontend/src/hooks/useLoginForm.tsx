@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login, signup } from "../store/actions/user-actions";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 interface useLoginFormProps {
     isLogin: boolean;
@@ -11,7 +12,8 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [email, setEmail] = useState("");
-
+    const { loggedInUser } = useSelector((state: any): any => state.userModule);
+ 
     const { pathname } = useLocation();
 
     const [errors, setErrors] = useState({
@@ -76,21 +78,22 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
             try {
                 if (pathname == "/signup") {
                     dispatch(signup({ username, password, email }));
-                } else if (pathname == "/home/admin") {
+                    navigate("/home");
+                } else if (pathname == "/home") {
                     dispatch(signup({ username, password, email }));
+                    navigate("/home");
                 } else {
                     const a = await dispatch(login({ ...userToLogin }));
                     a();
-                   navigate("/home");
+                    navigate("/home");
                 }
-
+                
                 //a();
             } catch (error) {
-                throw Error(
-                     error
-                );
+                throw Error(error);
             }
-
+            
+            
             setUsername("");
             setPassword("");
             setConfirmPassword("");

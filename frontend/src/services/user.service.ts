@@ -8,18 +8,34 @@ export const userService = {
     getUsers,
     deleteUser,
     editUser,
+    isAdmin,
+    
 };
 
 const STORAGE_KEY_LOGGEDIN_USER: string = "loggedinUser";
 
-async function getUsers() {
+async function isAdmin(token: any) {
     try {
-        const token: any =
-            store.getState().userModule.loggedInUser.authentication
-                .sessionToken;
+        // const token: any =
+        //     store.getState().userModule.loggedInUser.authentication
+        //         .sessionToken;
+        const users = await axios.get("http://localhost:3000/auth/admin", {
+            headers: { Authorization: `${token}` },
+        });
+        return users;
+    } catch (error) {
+        return error.response;
+    }
+}
+
+
+async function getUsers(token: any) {
+    try {
+        // const token: any =
+        //     store.getState().userModule.loggedInUser.authentication
+        //         .sessionToken;
         // const cookies = new Cookies();
         // cookies.set("auth-cookie-itay", token, { path: "/" });
-         console.log("token: ",token); 
 
         const users = await axios.get("http://localhost:3000/users/all", {
             headers: { Authorization: `${token}` },

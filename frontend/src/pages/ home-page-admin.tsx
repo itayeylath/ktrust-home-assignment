@@ -22,13 +22,6 @@ const HomePageAdmin = () => {
     const addformInputList: string[] = ["username", "email", "password"];
     const navigate = useNavigate();
 
-    // Get all data from server at thee refresh/start
-    useEffect(() => {
-        userService.getUsers().then((result: any) => {
-            setData(result.data);
-        });
-    }, [updatebutton, addButton]);
-
     const {
         username,
         setUsername,
@@ -56,7 +49,7 @@ const HomePageAdmin = () => {
         //event.preventDefault();
         //const data = new FormData(event.target);
         // Server request.
-        console.log("isConfirmAdd");
+        //console.log("isConfirmAdd");
         // setIsConfirmAdd(!isConfirmAdd)
         // setData((value: any) => [...value, Object.fromEntries(data)]);
     };

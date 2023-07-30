@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConfirmPassword } from '../components/inputs/confirm-password';
 import { Email } from '../components/inputs/email';
 import { Password } from '../components/inputs/password';
@@ -29,6 +29,15 @@ export const Login = () => {
 
 	const navigate = useNavigate();
 	
+    useEffect(() => {
+
+        let token = localStorage.getItem("myToken")
+    
+        if (token) {
+			navigate("/home");
+        } 
+    }, []);
+
 	return (
 		<main className="login-main-container flex ">
 			<div className="login-container f-col">

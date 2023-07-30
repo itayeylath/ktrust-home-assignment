@@ -1,6 +1,6 @@
 import express from "express";
 import { JWTsign, authentication, random } from "../helpers/users-helpers";
-import { createUser, getUserByEmail } from "../models/users-models";
+import { createUser, getUserByEmail, getUserBySessionToken } from "../models/users-models";
 require("dotenv").config();
 // Register New user
 export const register = async (req: express.Request, res: express.Response) => {
@@ -82,17 +82,18 @@ export const logOut = async (_req: express.Request, res: express.Response) => {
 };
 
 // Admin user authentication
-export const isAdminByMail = async (
+export const isAdminByToken = async (
     req: express.Request,
     res: express.Response
 ) => {
     try {
-        const { email } = req.params;
-        if (!email) {
+        const token = req.headers.authorization;
+        const user = await getUserBySessionToken(token);
+        if (!user) {
             return res.sendStatus(403);
-        }
+       }
 
-        if (email.toString() != process.env.ADMIN_EMAIL) {
+        if (user.email.toString() != process.env.ADMIN_EMAIL) {
             return res.sendStatus(403);
         }
 

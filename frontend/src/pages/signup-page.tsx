@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ConfirmPassword } from '../components/inputs/confirm-password';
 import { Email } from '../components/inputs/email';
 import { Password } from '../components/inputs/password';
@@ -21,6 +21,15 @@ export const Signup = () =>{
 		setConfirmPassword,
 	} = useLoginForm({isLogin: false});
 	const navigate = useNavigate();
+
+	useEffect(() => {
+
+        let token = localStorage.getItem("myToken")
+        if (token) {
+			navigate("/home");
+        } 
+    }, []);
+
   return (
     <div className="login-container">
 
@@ -54,7 +63,7 @@ export const Signup = () =>{
 					Sign Up
 				</button>
 			</form>
-			<button className="" onClick={() =>  navigate(-1)}>
+			<button className="" onClick={() =>  navigate("/")}>
 						Login
 					</button>
 		</div>

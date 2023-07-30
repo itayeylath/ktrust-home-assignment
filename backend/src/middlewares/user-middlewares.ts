@@ -14,9 +14,8 @@ export const isAuthenticated = async (
 ) => {
     try {
 
-        const token = req.headers.authorization;;
-        console.log("authHeader: ", token);
-        console.log("token: ", token);
+        const token = req.headers.authorization;
+
         if (!token) {
             return res.sendStatus(403);
         }
@@ -41,7 +40,9 @@ export const isAuthenticated = async (
 
         //const user = await getUserBySessionToken(sessionToken);
         const user = await getUserBySessionToken(token);
-
+         if (!user) {
+             return res.sendStatus(403);
+        }
         merge(req, { identity: user });
         return next();
     } catch (err) {
