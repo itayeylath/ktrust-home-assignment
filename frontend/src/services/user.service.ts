@@ -1,6 +1,4 @@
 import axios from "axios";
-import { store } from "../store";
-import Cookies from "universal-cookie";
 
 export const userService = {
     login,
@@ -9,16 +7,10 @@ export const userService = {
     deleteUser,
     editUser,
     isAdmin,
-    
 };
-
-const STORAGE_KEY_LOGGEDIN_USER: string = "loggedinUser";
-
+// Get if the User is admin by Token.
 async function isAdmin(token: any) {
     try {
-        // const token: any =
-        //     store.getState().userModule.loggedInUser.authentication
-        //         .sessionToken;
         const users = await axios.get("http://localhost:3000/auth/admin", {
             headers: { Authorization: `${token}` },
         });
@@ -27,26 +19,18 @@ async function isAdmin(token: any) {
         return error.response;
     }
 }
-
-
+// get all Users data.
 async function getUsers(token: any) {
     try {
-        // const token: any =
-        //     store.getState().userModule.loggedInUser.authentication
-        //         .sessionToken;
-        // const cookies = new Cookies();
-        // cookies.set("auth-cookie-itay", token, { path: "/" });
-
         const users = await axios.get("http://localhost:3000/users/all", {
             headers: { Authorization: `${token}` },
-            //headers: { Authorization: `Bearer${token}` },
         });
         return users;
     } catch (error) {
         return error.response;
     }
 }
-
+// Post exsit User.
 async function login(userCred: any) {
     try {
         const user = await axios.post(
@@ -58,6 +42,7 @@ async function login(userCred: any) {
         return error.response;
     }
 }
+// Post new User.
 async function signup(userCred: any) {
     try {
         const user = await axios.post(
@@ -65,12 +50,12 @@ async function signup(userCred: any) {
             userCred
         );
         return user;
-        //return saveLocalUser(user);
     } catch (error) {
         console.log("ERROR: axios.post");
         return error.response;
     }
 }
+// Delete User by id.
 async function deleteUser(id: any) {
     try {
         const user = await axios.delete(
@@ -78,15 +63,12 @@ async function deleteUser(id: any) {
         );
         return user;
     } catch (error) {
-        console.log("ERROR: axios.delete");
         return error.response;
     }
 }
-
+// Patch User by id.
 async function editUser(id: any, userCred: any) {
     try {
-        console.log("http://localhost:3000/users/update/" + id);
-        console.log("userCred ", userCred);
         const user = await axios.patch(
             "http://localhost:3000/users/update/" + id,
             { username: userCred }

@@ -7,8 +7,6 @@ import AdminTable from "../components/users-table/admin-table";
 import AddForm from "../components/users-table/add-form";
 import EditForm from "../components/users-table/edit-form ";
 import { useSelector } from "react-redux";
-import Cookies from "universal-cookie";
-import { logout } from "../store/actions/user-actions";
 
 const HomePage = () => {
     const [data, setData] = useState<any[] | []>([]);
@@ -17,32 +15,8 @@ const HomePage = () => {
     const [updateData, setUpdateData] = useState<any | undefined>();
     const [errorData, setErrorData] = useState<any | undefined>("");
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
-    //const [userContext, setUserContext]= useContext<any>(LoginUserContextApi)
     const { loggedInUser } = useSelector((state: any): any => state.userModule);
-    // Get all data from server at thee refresh/start
-    useEffect(() => {
-
-        let token = localStorage.getItem("myToken")
-        if (!token) {
-            token = loggedInUser.authentication.sessionToken
-        }
-        if (token) {
-            localStorage.setItem("myToken", token);
-            userService.isAdmin(token).then((result: any) => {
-                if (result.status === 200) {
-                    setIsAdmin(true);
-                }
-            });
-            userService.getUsers(token).then((result: any) => {
-                try {
-                    setData(result.data);
-                } catch (error) {
-                    setErrorData(error);
-                }
-            });
-
-        } 
-    }, [updatebutton, addButton]);
+    const navigate = useNavigate();
 
     const tableHeadlist: string[] = ["Username", "Email"];
     const formInputList: string[] = ["username", "email"];
@@ -50,29 +24,47 @@ const HomePage = () => {
     const editformInputList: string[] = ["username"];
     const addHeadlist: string[] = ["Username", "Email", "Password"];
     const addformInputList: string[] = ["username", "email", "password"];
-    const navigate = useNavigate();
 
-     const logoutOnClick = () => {
-        localStorage.removeItem("myToken")
-        navigate("/")
-     }
+    // Get all data from server at thee refresh/start/new data
+    useEffect(() => {
+        // Check if there is Token in localStorage. Otherwise, take from Redux.
+        let token = localStorage.getItem("myToken");
+        if (!token) {
+            token = loggedInUser.authentication.sessionToken;
+        }
+        // Only if TOken exsit- lode data.
+        if (token) {
+            localStorage.setItem("myToken", token);
+            // Axios get request.
+            userService.isAdmin(token).then((result: any) => {
+                if (result.status === 200) {
+                    setIsAdmin(true);
+                }
+            });
+            // Axios get request.
+            userService.getUsers(token).then((result: any) => {
+                try {
+                    setData(result.data);
+                } catch (error) {
+                    setErrorData(error);
+                }
+            });
+        }
+    }, [updatebutton, addButton]);
+
+    // Logout button.
+    const logoutOnClick = () => {
+        localStorage.removeItem("myToken");
+        navigate("/");
+    };
     // Click on add button.
     const handelButtonAdd = () => {
         setAddButton(!addButton);
         setUpdatebutton(false);
     };
-    //TODO
-    // Submit form data to server for add.
-    const handelSubmitAdd = async (event: any) => {
-        // event.preventDefault();
-        // const data = new FormData(event.target);
-        // // Server request.
-        // setData((value: any) => [...value, Object.fromEntries(data)]);
-    };
-
     // Click on delete button.
     const handelButtonDelete = async (index: number, id: string) => {
-        // TODO: add Server request.
+        // Axios delete request.
         userService.deleteUser(id).then((result: any) => {
             let newData = [];
 
@@ -94,13 +86,13 @@ const HomePage = () => {
     // Submit form data to server for update.
     const handelSubmitUpdate = async (event: any, id: number) => {
         event.preventDefault();
-        console.log("id: ", updateData.id);
         const element = Object.fromEntries(new FormData(event.target));
-        console.log("element: ", element.username);
         userService
             .editUser(updateData.id, element.username)
             .then((result: any) => {});
     };
+    // TODO: delete.
+    const handelSubmitAdd = async (event: any) => {};
 
     return (
         <div>

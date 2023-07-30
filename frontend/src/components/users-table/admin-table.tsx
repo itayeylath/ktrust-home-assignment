@@ -26,7 +26,7 @@ const AdminTable = (props: TableProps) => {
 
             {/* Create table body content */}
             <tbody>
-                { props.body.map((element: any, index: number) => {
+                {props.body.map((element: any, index: number) => {
                     return (
                         <tr className="table-body-row" key={index}>
                             {props.elementTypes
@@ -47,7 +47,10 @@ const AdminTable = (props: TableProps) => {
                                     className="table-row-delete"
                                     onClick={() => {
                                         // console.log("element: ")
-                                        props.handelButtonDelete(index,element._id);
+                                        props.handelButtonDelete(
+                                            index,
+                                            element._id
+                                        );
                                     }}
                                 >
                                     Delete

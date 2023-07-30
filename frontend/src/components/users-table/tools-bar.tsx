@@ -1,14 +1,12 @@
 interface ToolsBarProps {
     handelButtonAdd: any;
-  }
-  
-  const ToolsBar = (props: ToolsBarProps) => {
+}
+
+const ToolsBar = (props: ToolsBarProps) => {
     return (
-      
         <button className="add-btn-container" onClick={props.handelButtonAdd}>
-          Add
+            Add
         </button>
-      
     );
-  };
-  export default ToolsBar;
+};
+export default ToolsBar;

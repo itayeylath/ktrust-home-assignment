@@ -1,7 +1,4 @@
-import { stat } from "fs/promises";
-import { store } from "..";
 import { userService } from "../../services/user.service";
-//mport Cookies from 'universal-cookie';
 
 interface UserToLogIn {
     username: string;
@@ -13,12 +10,10 @@ interface UserToRegister extends UserToLogIn {
 }
 
 interface LogginInUser extends UserToRegister, UserToLogIn {}
-// itayeylath
+// Login User and dispatch data.
 export const login = (userToLogIn: UserToLogIn) => {
     return async function (dispatch: any): Promise<any> {
         try {
-            //optimistic approach
-
             const { data, status } = await userService.login(userToLogIn);
             dispatch({ type: "LOGIN", loggedInUser: data });
             if (status !== 200) {
@@ -29,14 +24,13 @@ export const login = (userToLogIn: UserToLogIn) => {
             }
 
             return () => status;
-			
         } catch (error) {
             dispatch({ type: "LOGIN", loggedInUser: null });
             throw error;
         }
     };
 };
-
+// Signup new User and dispatch data.
 export const signup = (userToRegister: UserToRegister) => {
     return async (dispatch: any): Promise<any> => {
         try {
@@ -55,11 +49,10 @@ export const signup = (userToRegister: UserToRegister) => {
         }
     };
 };
-
+// Logout User and dispatch data.
 export const logout = (loggedInUser: LogginInUser) => {
     return async (dispatch: any): Promise<any> => {
         try {
-            //await userService.logout();
             dispatch({ type: "LOGOUT", loggedInUser: null });
         } catch (error) {
             dispatch({ type: "LOGOUT", loggedInUser });
@@ -67,7 +60,3 @@ export const logout = (loggedInUser: LogginInUser) => {
         }
     };
 };
-
-
-
-

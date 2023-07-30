@@ -32,36 +32,35 @@ const AddForm = (props: AddFormProps) => {
         props.placeholdersNames,
         svgArr
     );
-  
+
     return (
         <div className="add-form">
-            <form onSubmit={handleSubmit} >
-                
-                    <div className="add-row">
-                        <Username
-                            errors={errors}
-                            setUsername={setUsername}
-                            validateInput={validateInput}
-                            username={username}
-                        />
-                    </div>
-                    <div className="add-row">
-                        <Password
-                            errors={errors}
-                            setPassword={setPassword}
-                            validateInput={validateInput}
-                            password={password}
-                        />
-                    </div>
-                    <div className="add-row">
-                        <Email
-                            errors={errors}
-                            setEmail={setEmail}
-                            validateInput={validateInput}
-                            email={email}
-                        />
-                    </div>
-                
+            <form onSubmit={handleSubmit}>
+                <div className="add-row">
+                    <Username
+                        errors={errors}
+                        setUsername={setUsername}
+                        validateInput={validateInput}
+                        username={username}
+                    />
+                </div>
+                <div className="add-row">
+                    <Password
+                        errors={errors}
+                        setPassword={setPassword}
+                        validateInput={validateInput}
+                        password={password}
+                    />
+                </div>
+                <div className="add-row">
+                    <Email
+                        errors={errors}
+                        setEmail={setEmail}
+                        validateInput={validateInput}
+                        email={email}
+                    />
+                </div>
+
                 <button className="btn-confirm" type="submit">
                     Confirm
                 </button>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login, signup } from "../store/actions/user-actions";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,9 +12,9 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [email, setEmail] = useState("");
-    const { loggedInUser } = useSelector((state: any): any => state.userModule);
- 
     const { pathname } = useLocation();
+    const dispatch: any = useDispatch();
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({
         username: "",
@@ -22,10 +22,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
         email: "",
         confirmPassword: "",
     });
-
-    const dispatch: any = useDispatch();
-    const navigate = useNavigate();
-
+    // Validate inputs.
     const validateInput = (name: string, value: string) => {
         let errorMessage = "";
         if (name === "username") {
@@ -63,7 +60,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
         validateInput("password", password);
         validateInput("email", email);
 
-        // Validate inputs
+        // Validate inputs ONLY if it is signup.
         if (!isLogin) {
             validateInput("username", username);
             validateInput("confirmPassword", confirmPassword);
@@ -74,7 +71,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
             const userToLogin: any = { password };
             userToLogin[username !== "" ? "username" : "email"] =
                 username !== "" ? username : email;
-
+            // Try dispatch in accordance to the /<path>.
             try {
                 if (pathname == "/signup") {
                     dispatch(signup({ username, password, email }));
@@ -87,13 +84,10 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
                     a();
                     navigate("/home");
                 }
-                
-                //a();
             } catch (error) {
                 throw Error(error);
             }
-            
-            
+            // Clean inputs.
             setUsername("");
             setPassword("");
             setConfirmPassword("");
