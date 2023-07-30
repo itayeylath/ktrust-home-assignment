@@ -23,7 +23,7 @@ cd backend
 
 ### Back-end
 
-(TypesScript, Django, MongoDB, Postman)
+(TypesScript, Express, MongoDB, Postman)
 
 <img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/express-js.png" width="100" hight="150"><img src="frontend/src/assets/readme/mongodb.png" width="100" hight="150"><img src="frontend/src/assets/readme/postman.png" width="100" hight="150">
 
