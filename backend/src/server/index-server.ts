@@ -1,4 +1,4 @@
-import { Application} from "express";
+import { Application } from "express";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import comptrssion from "compression";
@@ -6,9 +6,8 @@ import cors from "cors";
 import authRouter from "../routes/auth-routes";
 import usersRouter from "../routes/user-routes";
 
-//Server connect
-export const startServer = (port: number, app:Application) => {
-
+// Server connect.
+export const startServer = (port: number, app: Application) => {
     app.use(
         cors({
             credentials: true,
@@ -23,5 +22,7 @@ export const startServer = (port: number, app:Application) => {
     // Users delete/update/get data
     app.use("/users", usersRouter);
 
-    app.listen(port, () => console.log("Server started at port http://localhost:",port ));
+    app.listen(port, () =>
+        console.log("Server started at port http://localhost:" + port)
+    );
 };

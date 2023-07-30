@@ -6,7 +6,7 @@ const MONGO_URL = "mongodb://localhost/users-test";
 const port = 3000;
 export const app = express();
 
-startServer(port,app);
+startServer(port, app);
 connectDb(MONGO_URL);
 
 export default app;

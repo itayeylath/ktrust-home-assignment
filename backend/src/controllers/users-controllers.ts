@@ -1,8 +1,7 @@
 import express from "express";
 import { deleteUserById, getUserById, getUsers } from "../models/users-models";
-import { JWTverify } from "../helpers/users-helpers";
 
-// Get all users exsit in DB
+// Get all users exsited in DB.
 export const getAllusers = async (
     req: express.Request,
     res: express.Response
@@ -16,7 +15,7 @@ export const getAllusers = async (
     }
 };
 
-// Delete user by id
+// Delete user by id.
 export const deleteUser = async (
     req: express.Request,
     res: express.Response
@@ -30,7 +29,7 @@ export const deleteUser = async (
         return res.sendStatus(400).json({ massage: err.massage });
     }
 };
-// Update user by id
+// Update user by id.
 export const updateUser = async (
     req: express.Request,
     res: express.Response
@@ -38,7 +37,7 @@ export const updateUser = async (
     try {
         const { id } = req.params;
         const { username } = req.body;
-
+        // Error if input is empty.
         if (!username) {
             return res.sendStatus(403);
         }

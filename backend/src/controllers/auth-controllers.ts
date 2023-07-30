@@ -1,8 +1,13 @@
 import express from "express";
 import { JWTsign, authentication, random } from "../helpers/users-helpers";
-import { createUser, getUserByEmail, getUserBySessionToken } from "../models/users-models";
+import {
+    createUser,
+    getUserByEmail,
+    getUserBySessionToken,
+} from "../models/users-models";
 require("dotenv").config();
-// Register New user
+
+// Register New user.
 export const register = async (req: express.Request, res: express.Response) => {
     try {
         const { email, password, username } = req.body;
@@ -32,11 +37,11 @@ export const register = async (req: express.Request, res: express.Response) => {
     }
 };
 
-// Log in exist user
+// Login exist user.
 export const logIn = async (req: express.Request, res: express.Response) => {
     try {
         const { email, password } = req.body;
-
+        // Error if input is empty.
         if (!email || !password || email === "" || password === "") {
             return res.sendStatus(400);
         }
@@ -48,40 +53,26 @@ export const logIn = async (req: express.Request, res: express.Response) => {
         if (!user) {
             return res.sendStatus(400);
         }
-        const expectedHash = authentication(user.authentication.salt, password);
 
+        const expectedHash = authentication(user.authentication.salt, password);
+        // Valid password.
         if (user.authentication.password != expectedHash) {
             return res.sendStatus(403);
         }
+        // Creates a Token.
         const salt = random();
         const token = JWTsign(user.username, salt);
-
         user.authentication.sessionToken = token;
 
         await user.save();
 
-        res.cookie("auth-cookie-itay", user.authentication.sessionToken, {
-            domain: "localhost",
-            path: "/",
-        });
         return res.status(200).json(user).end();
-        //return res.status(200).json(user).end();
     } catch (err) {
         return res.sendStatus(400).json({ massage: err.massage });
     }
 };
 
-//Logout
-export const logOut = async (_req: express.Request, res: express.Response) => {
-    try {
-        res.clearCookie("auth-cookie-itay");
-        return res.status(200).end();
-    } catch (err) {
-        return res.sendStatus(400).json({ massage: err.massage });
-    }
-};
-
-// Admin user authentication
+// Admin user authentication.
 export const isAdminByToken = async (
     req: express.Request,
     res: express.Response
@@ -89,10 +80,11 @@ export const isAdminByToken = async (
     try {
         const token = req.headers.authorization;
         const user = await getUserBySessionToken(token);
+        // Error if user not exsit.
         if (!user) {
             return res.sendStatus(403);
-       }
-
+        }
+        // Error if it is NOT the admin.
         if (user.email.toString() != process.env.ADMIN_EMAIL) {
             return res.sendStatus(403);
         }
