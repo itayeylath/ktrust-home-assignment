@@ -75,7 +75,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
             try {
                 if (pathname == "/signup") {
                     dispatch(signup({ username, password, email }));
-                    navigate("/home");
+                    navigate("/");
                 } else if (pathname == "/home") {
                     dispatch(signup({ username, password, email }));
                     navigate("/home");
