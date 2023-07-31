@@ -31,7 +31,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
             }
         } else if (name === "password") {
             if (value.length < 8) {
-                errorMessage = "Password must be at least 8 characters long.";
+                errorMessage = "At least 8 char long.";
             } else if (!/\d/.test(value)) {
                 errorMessage = "Password must contain at least one number.";
             } else if (!/[!@#$%^&*]/.test(value)) {
@@ -85,6 +85,8 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
                     navigate("/home");
                 }
             } catch (error) {
+                const errorMessage = "User Not exsit.";
+                setErrors((prevErrors) => ({ ...prevErrors, ["password"]: errorMessage }));
                 throw Error(error);
             }
             // Clean inputs.

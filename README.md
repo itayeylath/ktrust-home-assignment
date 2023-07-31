@@ -22,7 +22,7 @@ cd backend
 <img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/react.png" width="100" hight="150"><img src="frontend/src/assets/readme/sass.png" width="100" hight="150"><img src="frontend/src/assets/readme/figma.png" width="100" hight="150"><img src="frontend/src/assets/readme/html.png" width="100" hight="150">
 
 ### Back-end
-
+o
 (TypesScript, Express, MongoDB, Postman)
 
 <img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/express-js.png" width="100" hight="150"><img src="frontend/src/assets/readme/mongodb.png" width="100" hight="150"><img src="frontend/src/assets/readme/postman.png" width="100" hight="150">

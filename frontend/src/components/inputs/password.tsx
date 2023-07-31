@@ -15,22 +15,26 @@ export const Password = ({
 }: PasswordProps) => {
     return (
         <>
-            <div className="form-group">
-                <label className="form-label" htmlFor="password">
-                    Password
-                </label>
-                <input
-                    className={`form-input ${errors.password && "error"}`}
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onBlur={(e) => validateInput("password", e.target.value)}
-                />
-                {errors.password && (
-                    <span className="error-message">{errors.password}</span>
-                )}
+            <div>
+                <h3 className="header3-container"> PASSWORD</h3>
+                <div className="email-container">
+                    <label className="email-lable" htmlFor="password">
+                        <input
+                            className={"password-input"}
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onBlur={(e) =>
+                                validateInput("password", e.target.value)
+                            }
+                        />
+                    </label>
+                    {errors.password && (
+                        <span className="pass-error-message">{errors.password}</span>
+                    )}
+                </div>
             </div>
         </>
     );

@@ -28,9 +28,12 @@ export const Login = () => {
     }, []);
 
     return (
-        <main className="login-main-container flex ">
+        <main className="login-main-container">
             <div className="login-container f-col">
-                <form className="login-form" onSubmit={handleSubmit}>
+            <h1 className="header1-container">WELCOME</h1>
+            <h2 className="header2-container">LOG IN</h2>
+            {/* className="login-form" */}
+                <form  className="form-container" onSubmit={handleSubmit}>
                     <Email
                         errors={errors}
                         setEmail={setEmail}
@@ -46,11 +49,12 @@ export const Login = () => {
                     />
 
                     <button className="form-button submit-btn" type="submit">
-                        Login
+                        
+                        LET'S GO!
                     </button>
                 </form>
-                <button className="" onClick={() => navigate("/signup")}>
-                    Signup
+                <button className="form-button submit-btn-signup" onClick={() => navigate("/signup")}>
+                Don’t have an account? Signup
                 </button>
             </div>
         </main>
