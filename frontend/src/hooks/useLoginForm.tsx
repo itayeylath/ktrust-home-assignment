@@ -27,7 +27,7 @@ export const useLoginForm = ({ isLogin }: useLoginFormProps) => {
         let errorMessage = "";
         if (name === "username") {
             if (value.length < 8) {
-                errorMessage = "Username must be at least 8 characters long.";
+                errorMessage = "At least 8 char long.";
             }
         } else if (name === "password") {
             if (value.length < 8) {

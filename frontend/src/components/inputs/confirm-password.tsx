@@ -15,14 +15,12 @@ export const ConfirmPassword = ({
 }: ConfirmPasswordProps) => {
     return (
         <>
-            <div className="form-group">
-                <label className="form-label" htmlFor="confirm-password">
-                    Confirm Password
-                </label>
+            <div>
+            <h3 className="header3-container"> REPEAT</h3>
+            <div className="email-container">
+                <label className="email-lable" htmlFor="confirm-password">
                 <input
-                    className={`form-input ${
-                        errors.confirmPassword && "error"
-                    }`}
+                    className={"password-input"}
                     type="password"
                     id="confirm-password"
                     name="confirm-password"
@@ -33,9 +31,12 @@ export const ConfirmPassword = ({
                     }
                     required
                 />
+                </label>
                 {errors.confirmPassword && (
-                    <p className="error-message">{errors.confirmPassword}</p>
+                    <p className="username-error-message">{errors.confirmPassword}</p>
                 )}
+                
+                </div>
             </div>
         </>
     );

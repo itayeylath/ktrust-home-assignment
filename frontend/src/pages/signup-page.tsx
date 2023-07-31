@@ -30,9 +30,11 @@ export const Signup = () => {
     }, []);
 
     return (
-        <div className="login-container">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h1 className="form-title">Sign Up</h1>
+        <main className="login-main-container">
+
+        <div className="login-container f-col">
+            <h1 className="header1-container">SIGN IN</h1>
+            <form className="form-container"onSubmit={handleSubmit}>
                 <Username
                     errors={errors}
                     setUsername={setUsername}
@@ -50,7 +52,7 @@ export const Signup = () => {
                     setConfirmPassword={setConfirmPassword}
                     validateInput={validateInput}
                     confirmPassword={confirmPassword}
-                />
+                    />
                 <Email
                     errors={errors}
                     setEmail={setEmail}
@@ -58,12 +60,13 @@ export const Signup = () => {
                     email={email}
                 />
                 <button className="form-button submit-btn" type="submit">
-                    Sign Up
+                LET'S GO!
                 </button>
             </form>
-            <button className="" onClick={() => navigate("/")}>
-                Login
+            <button className="form-button submit-btn-back-to-login" onClick={() => navigate("/")}>
+                 BACK TO LOG IN
             </button>
         </div>
+                    </main>
     );
 };

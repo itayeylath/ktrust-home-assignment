@@ -53,7 +53,7 @@ export const Login = () => {
                         LET'S GO!
                     </button>
                 </form>
-                <button className="form-button submit-btn-signup" onClick={() => navigate("/signup")}>
+                <button className="form-button submit-btn-back-to-signup" onClick={() => navigate("/signup")}>
                 Don’t have an account? Signup
                 </button>
             </div>

@@ -12,12 +12,12 @@ export const Username = ({
 }: UsernameProps) => {
     return (
         <>
-            <div className="form-group">
-                <label className="form-label" htmlFor="username">
-                    Username
-                </label>
+            <div>
+            <h3 className="header3-container"> USERNAME</h3>
+            <div className="email-container">
+                <label className="email-lable" htmlFor="username">
                 <input
-                    className={`form-input ${errors.username && "error"}`}
+                    className={"password-input"}
                     type="text"
                     id="username"
                     name="username"
@@ -27,9 +27,11 @@ export const Username = ({
                         validateInput("username", e.target.value)
                     }
                 />
+                </label>
                 {errors.username && (
-                    <span className="error-message">{errors.username}</span>
+                    <span className="username-error-message">{errors.username}</span>
                 )}
+                </div>
             </div>
         </>
     );
