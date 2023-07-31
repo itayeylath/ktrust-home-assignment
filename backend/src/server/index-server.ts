@@ -7,7 +7,7 @@ import authRouter from "../routes/auth-routes";
 import usersRouter from "../routes/user-routes";
 
 // Server connect.
-export const startServer = (port: number, app: Application) => {
+export const startServer = (port: string, app: Application) => {
     app.use(
         cors({
             credentials: true,
