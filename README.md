@@ -19,6 +19,9 @@ and then you will get admin permissions!
 cd backend
 ``` 
 ```
+npm i
+``` 
+```
 npm start
 ``` 
 #### Then the server will print:
@@ -28,6 +31,9 @@ npm start
 ### Frontend
 ```
 cd frontend
+``` 
+```
+npm i
 ``` 
 ```
 npm start
