@@ -95,7 +95,9 @@ const HomePage = () => {
     const handelSubmitAdd = async (event: any) => {};
 
     return (
-        <div>
+        <main className="login-main-container">
+        <div className="login-container f-col">
+        <h1 className="header1-container">HOME PAGE</h1>
             {!errorData &&
                 (!isAdmin ? (
                     <div>
@@ -113,7 +115,7 @@ const HomePage = () => {
                     </div>
                 ) : (
                     <div>
-                        <ToolsBar handelButtonAdd={handelButtonAdd} />
+                        <ToolsBar handelButtonAdd={handelButtonAdd} handelButtonLogOut={logoutOnClick} />
 
                         <AdminTable
                             head={tableHeadlist}
@@ -139,12 +141,11 @@ const HomePage = () => {
                                 />
                             )}
                         </div>
-                        <button className="" onClick={logoutOnClick}>
-                            Logout
-                        </button>
+                        
                     </div>
                 ))}
         </div>
+        </main>
     );
 };
 

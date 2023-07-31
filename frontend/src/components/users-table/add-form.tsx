@@ -34,7 +34,7 @@ const AddForm = (props: AddFormProps) => {
     );
 
     return (
-        <div className="add-form">
+        <div className="">
             <form onSubmit={handleSubmit}>
                 <div className="add-row">
                     <Username
@@ -61,8 +61,8 @@ const AddForm = (props: AddFormProps) => {
                     />
                 </div>
 
-                <button className="btn-confirm" type="submit">
-                    Confirm
+                <button className="form-button confirm-btn" type="submit">
+                    CONFIRM
                 </button>
             </form>
         </div>

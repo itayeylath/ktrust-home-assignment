@@ -1,38 +1,47 @@
 .add-btn-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0px;
-  gap: 1px;
-  border: none;
 
-  position: absolute;
+
+  position: relative;
   width: 214px;
-  height: 80px;
-  left: 33px;
-  top: 379px;
+  height: 150px;
+  right: 250px;
+  top: 100px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;    
 
   /* Light/Background/Paper */
-  background: #ffffff;
-  box-shadow: 0px 8px 40px rgba(58, 53, 65, 0.45);
-  border-radius: 12px;
+}
+.logOut-btn-container{
+  position: relative;
+  width: 214px;
+  height: 150px;
+  left: 750px;
+  top: 100px;
+
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;    
+
 }
 
 .add-btn-text {
+
+  position: relative;
+  top: 200px;
+  right: 580px;
+  padding-bottom: 0px;
+
   width: 82px;
   height: 24px;
 
   /* Light/Components/Button Medium */
-  font-family: ineter;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
 
-  /* identical to box height, or 171% */
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
 
   /* Light/Secondary/Main */
   color: #8a8d93;
