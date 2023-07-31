@@ -1,11 +1,39 @@
 # ktrust-home-assignment
 
 ## Setup Instructions
+Plaese make sure port 3000 is free.
 
-<!-- ### Backend
+### How to create Admin User?
+Create user with the email:
+```
+admin@gmail.com
+``` 
+With any pass you want, for example :)
+```
+Abc1234!
+``` 
+
+and then you will get admin permissions! 
+### Backend
 ```
 cd backend
-``` -->
+``` 
+```
+npm start
+``` 
+#### Then the server will print:
+###### "Server started at port http://localhost:3000
+###### Connected to DB"
+
+### Frontend
+```
+cd frontend
+``` 
+```
+npm start
+``` 
+#### Enjoy 😊
+#### Then the React app will open.
 
 ## Links
 
@@ -17,18 +45,18 @@ cd backend
 
 ### Front-end
 
-(TypesScript ,React, Nodejs, Scss, Figma HTML)
+(ReactTS, Scss, Figma, HTML)
 
-<img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/react.png" width="100" hight="150"><img src="frontend/src/assets/readme/sass.png" width="100" hight="150"><img src="frontend/src/assets/readme/figma.png" width="100" hight="150"><img src="frontend/src/assets/readme/html.png" width="100" hight="150">
+<img src="frontend/src/assets/readme/react.png" width="100" hight="150"><img src="frontend/src/assets/readme/sass.png" width="100" hight="150"><img src="frontend/src/assets/readme/figma.png" width="100" hight="150"><img src="frontend/src/assets/readme/html.png" width="100" hight="150">
 
 ### Back-end
-o
-(TypesScript, Express, MongoDB, Postman)
 
-<img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/express-js.png" width="100" hight="150"><img src="frontend/src/assets/readme/mongodb.png" width="100" hight="150"><img src="frontend/src/assets/readme/postman.png" width="100" hight="150">
+(ExpressTS, MongoDB, Postman)
+
+<img src="frontend/src/assets/readme/express-js.png" width="100" hight="150"><img src="frontend/src/assets/readme/mongodb.png" width="100" hight="150"><img src="frontend/src/assets/readme/postman.png" width="100" hight="150">
 
 ### Misc
 
-(Linux-ubuntu, Bash, Git, Jest)
+(Linux-Ubuntu, Bash, Git, Jest,TypesScript, NodeJS)
 
-<img src="frontend/src/assets/readme/linux.png" width="100" hight="150"><img src="frontend/src/assets/readme/ubuntu.png" width="100" hight="150"><img src="frontend/src/assets/readme/terminal-bash.png" width="100" hight="150"><img src="frontend/src/assets/readme/git.png" width="100" hight="150"><img src="frontend/src/assets/readme/jest.png" width="100" hight="150">
+<img src="frontend/src/assets/readme/linux.png" width="100" hight="150"><img src="frontend/src/assets/readme/ubuntu.png" width="100" hight="150"><img src="frontend/src/assets/readme/terminal-bash.png" width="100" hight="150"><img src="frontend/src/assets/readme/git.png" width="100" hight="150"><img src="frontend/src/assets/readme/jest.png" width="100" hight="150"><img src="frontend/src/assets/readme/ts.png" width="100" hight="150"><img src="frontend/src/assets/readme/nodejs(1).png" width="100" hight="150">
