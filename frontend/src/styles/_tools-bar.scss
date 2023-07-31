@@ -12,6 +12,9 @@
   border: none;
   cursor:pointer;
   overflow: hidden;    
+  &:hover {
+    opacity: 50%;
+}
 
   /* Light/Background/Paper */
 }
@@ -26,7 +29,11 @@
   background-repeat:no-repeat;
   border: none;
   cursor:pointer;
-  overflow: hidden;    
+  overflow: hidden; 
+  
+  &:hover {
+    opacity: 50%;
+}
 
 }
 

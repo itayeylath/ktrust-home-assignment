@@ -16,25 +16,30 @@ const EditForm = (props: AddFormProps) => {
     );
 
     return (
-        <div className="add-form">
+        <div className="add-row">
             <form onSubmit={props.handelSubmitAdd}>
                 {arr.map((element: string, index: number) => {
                     return (
-                        <div className="add-row" key={index}>
-                            <div className="add-icon" key={index + 1}>
+                        <div>
+                              <h3 className="header3-container"> USERNAME</h3>  
+                        <div className="email-container" key={index}>
+                           <label className="email-lable" htmlFor="username">
+                            <div key={index + 1}>
                                 {element[1]}
                             </div>
                             <input
-                                className="add-input"
+                                className={"password-input"}
                                 key={index + 2}
                                 name={element[0]}
                                 defaultValue={props.updateData}
                             />
+                            </label>
+                        </div>
                         </div>
                     );
                 })}
                 <input
-                    className="btn-confirm"
+                    className="form-button confirm-btn"
                     type="submit"
                     value="Confirm"
                 ></input>

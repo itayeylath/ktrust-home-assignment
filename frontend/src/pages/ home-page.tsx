@@ -7,6 +7,7 @@ import AdminTable from "../components/users-table/admin-table";
 import AddForm from "../components/users-table/add-form";
 import EditForm from "../components/users-table/edit-form ";
 import { useSelector } from "react-redux";
+import LogOutBtn from "../assets/svgs/logout-btn";
 
 const HomePage = () => {
     const [data, setData] = useState<any[] | []>([]);
@@ -96,55 +97,60 @@ const HomePage = () => {
 
     return (
         <main className="login-main-container">
-        <div className="login-container f-col">
-        <h1 className="header1-container">HOME PAGE</h1>
-            {!errorData &&
-                (!isAdmin ? (
-                    <div>
-                        {" "}
-                        <UserTable
-                            head={tableHeadlist}
-                            body={data}
-                            elementTypes={formInputList}
-                            handelButtonDelete={handelButtonDelete}
-                            handelButtonUpdate={handelButtonUpdate}
-                        />
-                        <button className="" onClick={logoutOnClick}>
-                            Logout
-                        </button>
-                    </div>
-                ) : (
-                    <div>
-                        <ToolsBar handelButtonAdd={handelButtonAdd} handelButtonLogOut={logoutOnClick} />
-
-                        <AdminTable
-                            head={tableHeadlist}
-                            body={data}
-                            elementTypes={formInputList}
-                            handelButtonDelete={handelButtonDelete}
-                            handelButtonUpdate={handelButtonUpdate}
-                        />
-                        <div className="hidden-divs">
-                            {addButton && (
-                                <AddForm
-                                    inputsNames={addformInputList}
-                                    placeholdersNames={addHeadlist}
-                                    handelSubmitAdd={handelSubmitAdd}
-                                />
-                            )}
-                            {updatebutton && (
-                                <EditForm
-                                    inputsNames={editformInputList}
-                                    placeholdersNames={editHeadlist}
-                                    handelSubmitAdd={handelSubmitUpdate}
-                                    updateData={updateData.name}
-                                />
-                            )}
+            <div className="login-container f-col">
+                <h1 className="header1-container">HOME PAGE</h1>
+                {!errorData &&
+                    (!isAdmin ? (
+                        <div>
+                            {" "}
+                            <UserTable
+                                head={tableHeadlist}
+                                body={data}
+                                elementTypes={formInputList}
+                                handelButtonDelete={handelButtonDelete}
+                                handelButtonUpdate={handelButtonUpdate}
+                            />
+                            <button
+                                className="logOut-btn-container"
+                                onClick={logoutOnClick}
+                            >
+                                <LogOutBtn></LogOutBtn>
+                            </button>
                         </div>
-                        
-                    </div>
-                ))}
-        </div>
+                    ) : (
+                        <div>
+                            <ToolsBar
+                                handelButtonAdd={handelButtonAdd}
+                                handelButtonLogOut={logoutOnClick}
+                            />
+
+                            <AdminTable
+                                head={tableHeadlist}
+                                body={data}
+                                elementTypes={formInputList}
+                                handelButtonDelete={handelButtonDelete}
+                                handelButtonUpdate={handelButtonUpdate}
+                            />
+                            <div className="hidden-divs">
+                                {addButton && (
+                                    <AddForm
+                                        inputsNames={addformInputList}
+                                        placeholdersNames={addHeadlist}
+                                        handelSubmitAdd={handelSubmitAdd}
+                                    />
+                                )}
+                                {updatebutton && (
+                                    <EditForm
+                                        inputsNames={editformInputList}
+                                        placeholdersNames={editHeadlist}
+                                        handelSubmitAdd={handelSubmitUpdate}
+                                        updateData={updateData.name}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    ))}
+            </div>
         </main>
     );
 };
